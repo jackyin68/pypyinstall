@@ -1,0 +1,180 @@
+
+1.下载pypy
+   https://www.pypy.org/
+   下载支持python3.7的版本，解压后放在一个目录，例如D:\pypy37
+
+2. 安装 VC runtime library installer
+VS140COMNTOOLS
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+SET VS90COMNTOOLS=%VS140COMNTOOLS%
+
+3. 设置环境变量
+将安装目录D:\pypy37加入path路径
+D:\pypy37\Scripts
+pypy可以查看版本号
+
+4.安装pip
+pypy3 -m ensurepip
+
+5.安装virtualenv
+pip install virtualenv
+
+6.创建虚拟环境
+cmd 到虚拟环境存放目录
+cd D:\venv
+virtualenv -p pypy3.exe pyenv
+
+7.激活虚拟环境
+D: & cd D:\venv\pyenv\Scripts & activate
+激活activate
+
+8.升级pip
+D:\venv\pyenv\Scripts\pypy3.exe -m pip install --upgrade pip
+
+9.安装cmake
+pip install cmake
+
+9.安装visual studio
+9.1 安装2019 Community
+环境变量
+path 
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64
+新变量
+VS160COMNTOOLS Common7/Tools 
+CMAKE_GENERATOR | Visual Studio 16 2019
+CMAKE_GENERATOR_PLATFORM | x64
+CMAKE_GENERATOR_TOOLSET | v142
+CMAKE_GENERATOR_INSTANCE | 
+the absolute path to a Visual Studio instance
+
+9.2 安装Visual Studio 2017
+
+D: & CHCP 65001 & cd D:\venv\pyenv\Scripts & activate & pypy3 -m pip install llvmlite==0.38.0
+
+llvmlite versions	compatible LLVM versions
+0.37.0 - ...	11.x.x
+
+cmake 3.22.2
+llvm 11.1.0
+llvmlite 0.37.0
+Visual Studio 16 2019
+
+
+
+
+
+9.3 安装llvm
+git clone https://github.com/llvm/llvm-project.git
+D:\github\src\llvmlite-0.38.0
+cd llvm-project
+mkdir build
+cd build
+
+cd D:\github\src\llvmlite-0.38.0\build
+
+下载cmake
+https://cmake.org/download/#latest
+https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2-windows-x86_64.msi
+
+https://github.com/jackyin68/llvmlite/archive/refs/tags/v0.37.0.zip
+https://codeload.github.com/llvm/llvm-project/zip/refs/tags/llvmorg-11.1.0
+
+python 3.7.12
+
+编译llvm
+cmake -DLLVM_ENABLE_PROJECTS=clang -G "Visual Studio 16 2019" -A x64 -Thost=x64 ../llvm
+
+用visual studio 2019打开编译
+## 在build目录下可以看到有一个名为LLVM.sln的VS项目，用VS打开即可
+打开llvm-project目录下的.gitignore文件，然后删除掉这一行（第25行）：
+/build*
+## 在CMakePredefinedTargets目录下找到ALL_BUILD，build它
+把Release/bin目录添加到PATH路径下
+D:\github\src\llvm-project\build\Release/bin
+
+环境变量
+CMAKE_PREFIX_PATH D:\github\src\llvm-project\build
+
+python setup.py build
+python setup.py install
+
+
+ LLVMConfig.cmake
+          llvm-config.cmake
+
+        Add the installation prefix of "LLVM" to CMAKE_PREFIX_PATH or set
+        "LLVM_DIR" to a directory containing one of the above files.  If "LLVM"
+        provides a separate development package or SDK, be sure it has been
+        installed.
+
+
+
+Reset Visual Studio instance
+Close Visual Studio (if you haven’t already).
+Open the registry editor (regedit.exe)
+Delete the HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\{version}
+Delete the HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\{version}_Config
+Delete the %USERNAME%\AppData\Local\Microsoft\VisualStudio\{version} directory.
+Enjoy your brand new Visual Studio instance.
+
+
+
+
+
+  选择使用c++的桌面开发/python开发/Visaul Studio 扩展开发/单个组件安装CMake
+D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\bin\Hostx64\x64
+D:\venv\pyenv\site-packages\cmake\data\bin
+
+VS170COMNTOOLS D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build
+VS90COMNTOOLS  %VS170COMNTOOLS%
+
+
+
+
+cmake
+CMAKE_GENERATOR Visual Studio 17 2022
+CMAKE_GENERATOR_PLATFORM x64
+CMAKE_GENERATOR_TOOLSET v143
+CMAKE_VS_PLATFORM_NAME_DEFAULT x64
+VS90COMNTOOLS %VS140COMNTOOLS%
+
+
+10. 安装visual studio 2005 安装SDK
+https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o~msft~vscom~older-downloads
+Visual Studio Community 2015 with Update 3
+Visual Studio 2015 Update 3 Modeling Software Development Kit (SDK)
+
+将"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN"添加到环境变量中
+在cmd中输入命令：
+pypy3 -mpip install --upgrade setuptools
+将"mt.exe"放到"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN"路径下面，下载地址：https://github.com/eladkarako/mt/blob/master/x64/mt.exe
+
+pypy3 -m pip install llvmlite==0.38.0
+
+设置
+CMAKE_GENERATOR
+Visual Studio 17 2022
+
+CMD乱码问题
+CHCP 65001
+在顶部窗口右键，点击属性，把字体改为Lucida Cinsole，这样就能解决乱码问题。
+
+
+
+
+下载
+http://go.microsoft.com/fwlink/?LinkId=691126
+下载安装程序： Microsoft Visual C++ Build Tools 2015，双击visualcppbuildtools_full.exe
+
+10. 安装模块
+下载版本
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
+cd D:\whl
+pypy3 -m pip install numpy-1.21.4+mkl-pp37-pypy37_pp73-win_amd64.whl
+
+pypy3 -m pip install llvmlite==0.38.0
+
+
+
+
+
