@@ -1,0 +1,2 @@
+# pypyinstall
+pypy llvmlite
