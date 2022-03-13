@@ -48,6 +48,10 @@ CMAKE_GENERATOR_INSTANCE |
 the absolute path to a Visual Studio instance
 
 9.2 安装Visual Studio 2017
+Visual Studio 15 2017
+cmake -DLLVM_ENABLE_PROJECTS=clang -G "Visual Studio 15 2017" -A x64 -Thost=x64 ../llvm
+
+
 
 D: & CHCP 65001 & cd D:\venv\pyenv\Scripts & activate & pypy3 -m pip install llvmlite==0.38.0
 
